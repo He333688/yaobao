@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>祝瑶宝生日快乐</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        .popup-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .popup {
+            position: absolute;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: "微软雅黑", sans-serif;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            pointer-events: auto;
+            max-width: 200px;
+            word-wrap: break-word;
+            animation: fadeInOut 3s ease-in-out;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.5); }
+            20% { opacity: 1; transform: scale(1); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+        .bg-pink { background-color: #FFC0CB; }
+        .bg-blue { background-color: #ADD8E6; }
+        .bg-yellow { background-color: #F0E68C; }
+        .bg-lightblue { background-color: #B0E0E6; }
+        .bg-lightpink { background-color: #FFB6C1; }
+    </style>
+</head>
+<body>
+    <div class="popup-container" id="popupContainer"></div>
+
+    <script>
+        // 增加“祝瑶宝生日快乐”的出现次数
+        const messages = [
+            "祝瑶宝生日快乐",
+            "祝瑶宝生日快乐",
+            "祝瑶宝生日快乐",
+            "瑶宝今天超可爱",
+            "一切美好都为你而来",
+            "你值得世间所有温柔",
+            "每天都要开开心心",
+            "你的笑容治愈一切",
+            "慢慢来，精彩在后面",
+            "今天也为瑶宝加油",
+            "你已经很棒啦",
+            "小插曲不影响主旋律",
+            "累了就歇会儿，没关系",
+            "你的坚持超有意义",
+            "你笑起来像小太阳"
+        ];
+
+        // 弹窗背景色样式列表
+        const bgClasses = [
+            "bg-pink",
+            "bg-blue",
+            "bg-yellow",
+            "bg-lightblue",
+            "bg-lightpink"
+        ];
+
+        const popupContainer = document.getElementById('popupContainer');
+
+        // 生成随机弹窗
+        function createPopup() {
+            const popup = document.createElement('div');
+            popup.className = `popup ${randomItem(bgClasses)}`;
+            popup.innerText = randomItem(messages);
+            
+            // 随机位置和字体大小
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const x = Math.random() * (screenWidth-200);
+            const y = Math.random() * (screenHeight-100);
+            popup.style.left = `${x}px`;
+            popup.style.top = `${y}px`;
+            popup.style.fontSize = `${Math.random() * 6 + 14}px`;
+
+            popupContainer.appendChild(popup);
+
+            // 3秒后移除弹窗
+            setTimeout(() => {
+                popup.remove();
+            }, 3000);
+
+            // 定时创建新弹窗（间隔更短，弹窗更密集）
+            setTimeout(createPopup, Math.random() * 500 + 300);
+        }
+
+        // 随机获取数组元素
+        function randomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // 启动弹窗效果
+        createPopup();
+    </script>
+</body>
+</html>
